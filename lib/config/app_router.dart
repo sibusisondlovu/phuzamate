@@ -1,6 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sab_app/models/category_model.dart';
+import 'package:sab_app/models/drink_model.dart';
 import 'package:sab_app/screens/cart/cart_screen.dart';
+import 'package:sab_app/screens/catalog/catalog_screen.dart';
+import 'package:sab_app/screens/drink/drink_screen.dart';
+import 'package:sab_app/screens/favourites/favourite_screen.dart';
 import 'package:sab_app/screens/home/home_screen.dart';
 import 'package:sab_app/screens/profile/profile_screen.dart';
 
@@ -15,6 +20,12 @@ class AppRouter {
         return CartScreen.route();
       case '/profile':
         return ProfileScreen.route();
+      case '/drink':
+        return DrinkScreen.route(drink:settings.arguments as DrinkModel);
+      case '/catalog':
+        return CatalogScreen.route(category: settings.arguments as Category);
+      case '/favourite':
+        return FavouriteScreen.route();
       default:
         return _errorRoute();
     }

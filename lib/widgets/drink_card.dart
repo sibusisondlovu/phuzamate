@@ -3,14 +3,21 @@ import 'package:sab_app/models/drink_model.dart';
 
 class DrinkCard extends StatelessWidget {
   final DrinkModel drink;
-  const DrinkCard({Key? key, required this.drink}) : super(key: key);
+  final double withFactor;
+  final bool isFavourite;
+  const DrinkCard(
+      {Key? key,
+      required this.drink,
+      this.withFactor = 2.5,
+      this.isFavourite = false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Container(
-          width: MediaQuery.of(context).size.width / 2.5,
+          width: MediaQuery.of(context).size.width / withFactor,
           height: 150,
           child: Image.asset(
             drink.imageUrl,
@@ -18,9 +25,8 @@ class DrinkCard extends StatelessWidget {
           ),
         ),
         Positioned(
-
           child: Container(
-            width: MediaQuery.of(context).size.width / 2.0,
+            width: MediaQuery.of(context).size.width / withFactor,
             height: 150,
             decoration: BoxDecoration(color: Colors.black.withAlpha(50)),
           ),
@@ -29,7 +35,7 @@ class DrinkCard extends StatelessWidget {
           top: 80,
           left: 5,
           child: Container(
-            width: MediaQuery.of(context).size.width / 2.0 - 10,
+            width: MediaQuery.of(context).size.width / withFactor - 10,
             height: 55,
             decoration: BoxDecoration(color: Colors.black),
             child: Padding(
@@ -49,22 +55,37 @@ class DrinkCard extends StatelessWidget {
                               .headline5!
                               .copyWith(color: Colors.white),
                         ),
-                        Text(
-                          'R ' + drink.price.toString(),
+                        isFavourite == false? Text(
+                          'R ' + drink.price.toStringAsFixed(2),
                           style: Theme.of(context)
                               .textTheme
                               .headline6!
                               .copyWith(color: Colors.white),
-                        )
+                        ):Container()
                       ],
                     ),
                   ),
+                  isFavourite == false? Expanded(
+                    child: IconButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/drink',
+                              arguments: drink);
+                        },
+                        icon: Icon(
+                          Icons.add_circle,
+                          color: Colors.white,
+                        )),
+                  ):
                   Expanded(
                     child: IconButton(
-                        onPressed: (){
-
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/drink',
+                              arguments: drink);
                         },
-                        icon: Icon(Icons.add_circle, color: Colors.white,)),
+                        icon: Icon(
+                          Icons.remove_circle_outline,
+                          color: Colors.white,
+                        )),
                   )
                 ],
               ),

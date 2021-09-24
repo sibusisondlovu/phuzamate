@@ -60,7 +60,7 @@ class HomeScreen extends StatelessWidget {
                     itemCount: DrinkModel.drinks.length,
                     itemBuilder: (context, index){
                       return Padding(padding: EdgeInsets.only(right: 5),
-                      child: DrinkCard(drink: DrinkModel.drinks[index],),);
+                      child: DrinkCard(drink: DrinkModel.drinks[index],isFavourite: false,),);
                     }),
               ),
             ),

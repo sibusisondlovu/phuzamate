@@ -10,6 +10,12 @@ class CustomAppBar extends StatelessWidget  with PreferredSizeWidget{
       backgroundColor: Colors.transparent,
       elevation: 0,
       centerTitle: true,
+      leading: IconButton(
+        color: Colors.black,
+        onPressed: (){
+          Navigator.pop(context);
+        },
+        icon: Icon(Icons.chevron_left),),
       title: Container(
         color: Colors.black,
         child: Text(
@@ -21,7 +27,7 @@ class CustomAppBar extends StatelessWidget  with PreferredSizeWidget{
       actions: [
         IconButton(
           onPressed: (){
-            Navigator.pushNamed(context, '/cart');
+            Navigator.pushNamed(context, '/favourite');
           },
           icon: Icon(Icons.favorite, color: Colors.black) ,
         )
